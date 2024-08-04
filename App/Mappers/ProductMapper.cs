@@ -13,6 +13,7 @@ namespace MyShopApi.App.Mappers
                 {
                     return src.Category?.Title ?? "";
                 }));
+            CreateMap<CreateInoutDTO, Product>();
         }
     }
 }

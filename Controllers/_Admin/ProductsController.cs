@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,11 @@ namespace MyShopApi.Controllers._Admin
     public class ProductsController : ControllerBase
     {
         private IProductRepo _repo;
-        public ProductsController(IProductRepo repository)
+        private readonly IMapper _mapper; 
+        public ProductsController(IProductRepo repository, IMapper mapper)
         {
             _repo = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,9 +36,10 @@ namespace MyShopApi.Controllers._Admin
         }
 
         [HttpPost]
-        public ActionResult Create(Product input)
+        public ActionResult Create(CreateInoutDTO input)
         {
-            var productID = _repo.CreateProduct(input);
+            var productamp = _mapper.Map<Product>(input);
+            var productID = _repo.CreateProduct(productamp);
             if (productID > 0)
                 return Ok(productID);
             return BadRequest("Create product failed!");

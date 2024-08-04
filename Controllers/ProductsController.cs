@@ -9,9 +9,9 @@ namespace MyShopApi.Controllers
     [ApiController]
     public class ProductsController : Controller
     {
-        private readonly ProductRepo _repo;
-
-        public ProductsController(ProductRepo repo)
+        private readonly IProductRepo _repo;
+        
+        public ProductsController(IProductRepo repo)
         {
             _repo = repo;
         }

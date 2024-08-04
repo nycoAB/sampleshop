@@ -49,16 +49,12 @@ namespace MyShopApi.Repositories
         }
         public int CreateProduct(Product product)
         {
-            try
-            {
+            
                 var newProduct = _db.Products.Add(product);
                 _db.SaveChanges();
                 return newProduct.Entity.ID;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
+            
+           
         }
         public bool UpdateProduct(int id, Product product)
         {

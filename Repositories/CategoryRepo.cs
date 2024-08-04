@@ -1,4 +1,5 @@
-﻿using MyShopApi.App;
+﻿using Microsoft.EntityFrameworkCore;
+using MyShopApi.App;
 using MyShopApi.Models;
 
 namespace MyShopApi.Repositories
@@ -11,7 +12,7 @@ namespace MyShopApi.Repositories
             _context = context;
         }
         public IEnumerable<Category> GetCategories() { 
-            var categories = _context.Categories.ToList();
+            var categories = _context.Categories.Include(p => p.Products).ToList();
             return categories;
             
         }
